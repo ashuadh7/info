@@ -288,7 +288,7 @@ function App() {
               <div className="bg-white rounded-xl shadow-lg p-8">
                 <div className="flex flex-col md:flex-row gap-8 items-start">
                   <img 
-                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80" 
+                    src="/info/Potrait.jpeg" 
                     alt="Ashu Adhikari" 
                     className="w-64 h-64 object-cover rounded-lg shadow-md"
                   />
