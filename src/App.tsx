@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Code2, User, Briefcase, GraduationCap, Github, Linkedin, Mail, ArrowLeft, Youtube } from 'lucide-react';
 
 type Tab = 'projects' | 'about' | 'skills';
