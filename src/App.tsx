@@ -1,21 +1,21 @@
 import { useState } from 'react';
-import { Briefcase, User, Code2, Github, Linkedin, Mail } from 'lucide-react';
+import { Briefcase, User, Github, Linkedin, Mail, GraduationCap } from 'lucide-react';
 import Projects from './components/Projects';
 import About from './components/About';
-import Skills from './components/Skills';
 import ProjectDetails from './components/ProjectDetails';
+import Publications from './components/Publications';
 
-type Tab = 'projects' | 'about' | 'skills';
+type Tab = 'projects' | 'about' | 'publications';
 type View = 'main' | 'project-details';
 
 function App() {
     const [activeTab, setActiveTab] = useState<Tab>('projects');
     const [view, setView] = useState<View>('main');
 
-    const tabs = [
+    const tabs: { id: Tab; label: string; icon: any }[] = [
         { id: 'projects', label: 'Projects', icon: Briefcase },
         { id: 'about', label: 'About', icon: User },
-        { id: 'skills', label: 'Skills', icon: Code2 }
+        { id: 'publications', label: 'Publications', icon: GraduationCap }
     ];
 
     return (
@@ -67,7 +67,7 @@ function App() {
                     <>
                         {activeTab === 'projects' && <Projects openProject={() => setView('project-details')} />}
                         {activeTab === 'about' && <About />}
-                        {activeTab === 'skills' && <Skills />}
+                        {activeTab === 'publications' && <Publications />}
                     </>
                 )}
             </main>
