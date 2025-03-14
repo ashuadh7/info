@@ -1,3 +1,6 @@
+import ReactMarkdown from "react-markdown";
+import aboutMe from "./AboutMe"; // Corrected path
+
 const About = () => {
     return (
         <div className="bg-white rounded-xl shadow-lg p-8">
@@ -7,12 +10,40 @@ const About = () => {
                     alt="Ashu Adhikari"
                     className="w-64 h-64 object-cover rounded-lg shadow-md"
                 />
-                <div>
-                    <h2 className="text-2xl font-bold text-gray-900 mb-4">About Me</h2>
-                    <p className="text-gray-600">
-                        As an HCI researcher and software developer, I focus on creating
-                        intuitive and efficient interfaces that bridge the gap between humans and technology.
-                    </p>
+                <div className="text-gray-600">
+                    <ReactMarkdown
+                        components={{
+                            h1: ({ children }) => <h1 className="text-3xl font-bold text-gray-900 mb-4">{children}</h1>,
+                            h2: ({ children }) => <h2 className="text-2xl font-semibold text-gray-800 mt-4 mb-2">{children}</h2>,
+                            h3: ({ children }) => <h3 className="text-xl font-medium text-gray-700 mt-3 mb-2">{children}</h3>,
+                            p: ({ children }) => <p className="text-gray-600 mb-3">{children}</p>,
+                            ul: ({ children }) => <ul className="list-disc pl-5">{children}</ul>,
+                            li: ({ children }) => <li className="mb-1">{children}</li>,
+                            a: ({ href = "", children }) => { // Ensure href is always a string
+                                const isExternal = href.startsWith("http");
+                                const isMailto = href.startsWith("mailto:");
+
+                                return (
+                                    <a
+                                        href={href}
+                                        target={isExternal ? "_blank" : undefined}
+                                        rel={isExternal ? "noopener noreferrer" : undefined}
+                                        className="text-blue-500 hover:underline"
+                                        onClick={(e) => {
+                                            if (isMailto) {
+                                                e.preventDefault(); // Prevent page change
+                                                window.open(href, "_blank"); // Open mail client
+                                            }
+                                        }}
+                                    >
+                                        {children}
+                                    </a>
+                                );
+                            },
+                        }}
+                    >
+                        {aboutMe}
+                    </ReactMarkdown>
                 </div>
             </div>
         </div>

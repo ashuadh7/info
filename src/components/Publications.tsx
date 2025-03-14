@@ -95,9 +95,9 @@
             link: "https://www.youtube.com/watch?v=jzoaBAd6gPY"
         },
         {
-            title: "SIRIUS",
+            title: "SIRIUS [Curated & peer-reviewed Virtual Reality Exhibition]",
             authors: "Miller, N., Desnoyers-Stewart, J., Stepanova, E. R., Adhikari, A., Riecke, B. E., Pennefather, P. P., Kitson, A., & Quesnel, D.",
-            event: "Curated & peer-reviewed Virtual Reality Exhibition in V-Unframed 2021",
+            event: "V-Unframed 2021, Vancouver, Canada.",
             link: "https://www.alliancefrancaise.ca/v-unframed/en/the-artworks-2021/sirius/",
         }
     ];
