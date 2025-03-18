@@ -1,4 +1,3 @@
-import React from "react";
 import ExploringEndlessWorlds from "./projects/ExploringEndlessWorlds";
 import VRBeyondTheOrdinary from "./projects/VRBeyondTheOrdinary";
 import VRVsChronicPain from "./projects/VRVsChronicPain";
