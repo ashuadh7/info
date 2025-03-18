@@ -1,20 +1,22 @@
-import { ArrowLeft } from 'lucide-react';
+import React from "react";
+import ExploringEndlessWorlds from "./projects/ExploringEndlessWorlds";
+import VRBeyondTheOrdinary from "./projects/VRBeyondTheOrdinary";
+import VRVsChronicPain from "./projects/VRVsChronicPain";
+import FeelTheBeat from "./projects/FeelTheBeat";
+import MasterYourEmotions from "./projects/MasterYourEmotions";
+import ProjectPlayground from "./projects/ProjectPlayground";
 
-const ProjectDetails = ({ goBack }: { goBack: () => void }) => {
-    return (
-        <div className="space-y-8">
-            <button onClick={goBack} className="flex items-center text-indigo-600 hover:text-indigo-700 font-medium mb-6">
-                <ArrowLeft size={20} className="mr-2" />
-                Back to Projects
-            </button>
-            <div className="bg-white rounded-xl shadow-lg p-8">
-                <h1 className="text-3xl font-bold text-gray-900 mb-4">Exploring Endless Worlds in VR</h1>
-                <p className="text-xl text-gray-600 mb-8">
-                    Dive into the fun, intuitive, and nausea-free ways to move around in virtual reality!
-                </p>
-            </div>
-        </div>
-    );
+const ProjectDetails = ({ project }: { project: string }) => {
+    const projectComponents: { [key: string]: JSX.Element } = {
+        "exploring-endless-worlds": <ExploringEndlessWorlds />,
+        "vr-beyond-the-ordinary": <VRBeyondTheOrdinary />,
+        "vr-vs-chronic-pain": <VRVsChronicPain />,
+        "feel-the-beat": <FeelTheBeat />,
+        "master-your-emotions": <MasterYourEmotions />,
+        "project-playground": <ProjectPlayground />,
+    };
+
+    return projectComponents[project] || <p>Project not found.</p>;
 };
 
 export default ProjectDetails;

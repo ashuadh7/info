@@ -1,77 +1,46 @@
-import { useState } from 'react';
-import { Briefcase, User, Github, Linkedin, Mail, GraduationCap } from 'lucide-react';
-import Projects from './components/Projects';
-import About from './components/About';
-import ProjectDetails from './components/ProjectDetails';
-import Publications from './components/Publications';
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import AboutPage from "./pages/AboutPage";
+import PublicationsPage from "./pages/PublicationsPage";
+import ProjectsPage from "./pages/ProjectsPage";
+import ExploringEndlessWorldsPage from "./pages/projects/ExploringEndlessWorldsPage";
+import FeelTheBeatPage from "./pages/projects/FeelTheBeatPage";
+import MasterYourEmotionsPage from "./pages/projects/MasterYourEmotionsPage";
+import ProjectPlaygroundPage from "./pages/projects/ProjectPlaygroundPage";
+import VRBeyondTheOrdinaryPage from "./pages/projects/VRBeyondTheOrdinaryPage";
+import VRVsChronicPainPage from "./pages/projects/VRVsChronicPainPage";
 
-type Tab = 'projects' | 'about' | 'publications';
-type View = 'main' | 'project-details';
+const BASE_URL = import.meta.env.BASE_URL; // Ensures correct base path
 
 function App() {
-    const [activeTab, setActiveTab] = useState<Tab>('projects');
-    const [view, setView] = useState<View>('main');
-
-    const tabs: { id: Tab; label: string; icon: any }[] = [
-        { id: 'projects', label: 'Projects', icon: Briefcase },
-        { id: 'about', label: 'About', icon: User },
-        { id: 'publications', label: 'Publications', icon: GraduationCap }
-    ];
-
     return (
-        <div className="min-h-screen bg-gray-50">
-            <header className="bg-white shadow-sm sticky top-0 z-50">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-                    <div className="flex justify-between items-center">
-                        <div>
-                            <h1 className="text-2xl font-bold text-gray-900">Ashu Adhikari</h1>
-                            <p className="text-gray-600">HCI Researcher & Software Developer</p>
-                        </div>
-                        <div className="flex space-x-4">
-                            <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-indigo-600">
-                                <Github size={24} />
-                            </a>
-                            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-indigo-600">
-                                <Linkedin size={24} />
-                            </a>
-                            <a href="mailto:contact@example.com" className="text-gray-600 hover:text-indigo-600">
-                                <Mail size={24} />
-                            </a>
-                        </div>
-                    </div>
-
-                    {view === 'main' && (
-                        <nav className="mt-6">
-                            <div className="flex space-x-4">
-                                {tabs.map(({ id, label, icon: Icon }) => (
-                                    <button
-                                        key={id}
-                                        onClick={() => setActiveTab(id)}
-                                        className={`flex items-center px-4 py-2 rounded-lg transition-colors ${activeTab === id ? 'bg-indigo-600 text-white' : 'text-gray-600 hover:bg-gray-100'
-                                            }`}
-                                    >
-                                        <Icon size={18} className="mr-2" />
-                                        {label}
-                                    </button>
-                                ))}
-                            </div>
-                        </nav>
-                    )}
-                </div>
-            </header>
-
+        <Router basename={BASE_URL}>
+            <Navbar />
             <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                {view === 'project-details' ? (
-                    <ProjectDetails goBack={() => setView('main')} />
-                ) : (
-                    <>
-                        {activeTab === 'projects' && <Projects openProject={() => setView('project-details')} />}
-                        {activeTab === 'about' && <About />}
-                        {activeTab === 'publications' && <Publications />}
-                    </>
-                )}
+                <Routes>
+                    {/* Redirect only `/info/` to `/info/projects/` */}
+                    <Route path="/" element={<Navigate replace to="projects" />} />
+
+                    {/* Main Pages */}
+                    <Route path="projects" element={<ProjectsPage />} />
+                    <Route path="about" element={<AboutPage />} />
+                    <Route path="publications" element={<PublicationsPage />} />
+
+                    {/* Individual Project Pages */}
+                    <Route path="projects/exploring-endless-worlds" element={<ExploringEndlessWorldsPage />} />
+                    <Route path="projects/feel-the-beat" element={<FeelTheBeatPage />} />
+                    <Route path="projects/master-your-emotions" element={<MasterYourEmotionsPage />} />
+                    <Route path="projects/project-playground" element={<ProjectPlaygroundPage />} />
+                    <Route path="projects/vr-beyond-the-ordinary" element={<VRBeyondTheOrdinaryPage />} />
+                    <Route path="projects/vr-vs-chronic-pain" element={<VRVsChronicPainPage />} />
+
+                    {/* Catch-all route to prevent blank pages */}
+                    <Route path="*" element={<Navigate replace to="projects" />} />
+                </Routes>
             </main>
-        </div>
+            <Footer />
+        </Router>
     );
 }
 
